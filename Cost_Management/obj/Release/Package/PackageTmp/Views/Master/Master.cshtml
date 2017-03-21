@@ -1,0 +1,259 @@
+﻿@model Cost_Management.Models.expense_form
+
+@{
+    ViewBag.Title = "Master";
+}
+@section scripts{
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+
+    <h2>填寫申報單</h2>
+
+    using (Html.BeginForm("Master", "Master", FormMethod.Post
+    , new { enctype = "multipart/form-data" }))
+    {
+            <div id="content" style="height:200px;width:45%;float:right;">
+                <font style="background-color:#FFBB73;"size=4>
+                    請購單號:由請購申請完成後獲得該申請的序號<br><br>
+                    群組編號:所屬群組的編號<br><br>
+                    專案代號:該專案所需申請費用依該專案代號填寫<br><br>
+                    費用說明:該筆申報的理由及內容<br><br>
+                    國內/國外:該筆消費的地區<br><br>
+                    消費日期:支出的費用日期,請與發票單據同日期<br><br>
+                    消費城市:該筆消費花費地點,例如:搭高鐵 由新左營到台北,請填寫購買車票地點<br><br>
+                    姓名:該筆消費所屬人,可與填寫人不同<br><br>
+                    工號:該筆消費所屬人的工號<br><br>
+                    費用類別:公司申報類費用:例如:管理費用、營業費用、製造費用<br><br>
+                    費用屬性:該筆所屬費用類別的項目:例如營業費用裡的文具用品、薪資支出、旅費<br><br>
+                    該筆消費的物件數:例如文具用品10隻 則填寫10<br><br>
+                    原幣總價:如為外幣請填寫外幣金額,如為台幣則空白<br><br>
+                    台幣總價:該筆申報單預計要申請的總金額<br><br>
+                    稅額:如為外國匯率知道者可填寫,不知則可空交由簽核者填寫<br><br>
+                    發票號碼:該筆消費發票的發票號碼<br><br>
+                    附註:該筆消費另外需加註的說明<br><br>
+                    單據序號:請將發票收據自做隨機編號,並將該編號填寫此欄做驗證<br><br>
+                    單據圖片:該筆消費的圖片,像素請別超過 <span style="color:red;">606 X 375<span><br><br>
+</font>
+            </div>
+            @Html.AntiForgeryToken()
+            <div id="menu" class="form-horizontal" style="width:55%;float:left;">
+
+                
+                <font color="#FF0000">(*為必填)</font>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RequireNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.RequireNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.RequireNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.circleID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.circleID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.circleID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.projectCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.projectCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.projectCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nation, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.nation, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.nation, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.exp_date, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.exp_date, new { htmlAttributes = new { @class = "form-control", data_datapicker = "" } })
+                        @Html.ValidationMessageFor(model => model.exp_date, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.location, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.location, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.location, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.userID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.userID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.userID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.userName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.exp_type, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.exp_type, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.exp_type, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.exp_attr, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.exp_attr, new { htmlAttributes = new { @class = "form-control", placeholder = "餐費/油費/住宿/其它" } })
+                        @Html.ValidationMessageFor(model => model.exp_attr, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.currency, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.currency, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.currency, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.QTY, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.QTY, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.QTY, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.amount, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.tax, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.tax, new { htmlAttributes = new { @class = "form-control", placeholder = "(%)" } })
+                        @Html.ValidationMessageFor(model => model.tax, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.invoice, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.invoice, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.invoice, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.note, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.note, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.note, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DocumentsNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DocumentsNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DocumentsNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ItemImage0, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+
+                        <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+                        <body>
+                            @Html.TextBoxFor(model => model.ItemImage0, new { type = "file", id = "ItemImage0", accept = "image/*" })
+                            @Html.TextBoxFor(model => model.ItemImage1, new { type = "file", id = "ItemImage1", accept = "image/*" })
+                            @Html.TextBoxFor(model => model.ItemImage2, new { type = "file", id = "ItemImage2", accept = "image/*" })
+                            <img id="img" src="">
+
+                            <script>
+                                $("#ItemImage0").change(function () {
+                                    readImage(this);
+                                });
+                                $("#ItemImage1").change(function () {
+                                    readImage(this);
+                                });
+                                $("#ItemImage2").change(function () {
+                                    readImage(this);
+                                });
+
+                                function readImage(input) {
+                                    if (input.files && input.files[0]) {
+                                        var FR = new FileReader();
+                                        FR.onload = function (e) {
+                                            //e.target.result = base64 format picture
+                                            $('#img').attr("src", e.target.result);
+                                        };
+                                        FR.readAsDataURL(input.files[0]);
+                                    }
+                                }
+
+                            </script>
+
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+
+                </div>
+            </div>
+            }
+
+            }
+            else
+            {
+            <h2>尚未登入</h2>
+            }

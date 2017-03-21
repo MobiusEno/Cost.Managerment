@@ -1,0 +1,279 @@
+﻿@model Cost_Management.ViewModel.MasterView
+@using Microsoft.AspNet.Identity
+
+@section scripts{
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/DeleteConfirm.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+
+    <h1>查詢費用申報單</h1>
+
+    <div id="Header" align="center">
+       
+            @using (Html.BeginForm("Demand", "Master", FormMethod.Get))
+                {
+                <form class="form-horizontal">
+                    <font size="5" >
+                        <table class="table">
+                            <tr class="success">
+                                <td>
+                                    搜尋:
+                                </td>
+
+                                <td align="center" >
+                                  
+                                        @Html.EditorFor(model => model.DateSearch, new { htmlAttributes = new { @placeholder = "搜尋日期", data_datapicker = "", onchange = "this.form.submit();" } })
+                              
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(model => model.Search, new { @placeholder = "表單名稱、姓名" })
+
+                                </td>
+                                <td align="center">
+                                    <input type="submit" class = "btn btn-primary" value="送出" />
+                                    @Html.ActionLink("清空", "Demand", "Master", null, new { @class = "btn btn-warning" })
+                                </td>
+                            </tr>
+                        </table>
+                    </font>
+                    <hr>
+                    <table class="table table-striped">
+                      
+                            <tr>
+                                <th>
+                                   表單<br>代碼
+                                </th>
+                                <th>
+                                    表單名稱
+                                    @Html.RadioButtonFor(model => model.sortOrder, "formName_desc", new { id = "Choice_1" ,onchange = "this.form.submit();" })
+                                </th>
+                                <th>
+                                    專案代號
+                                    @Html.RadioButtonFor(model => model.sortOrder, "projectcode_desc", new { id = "Choice_2", onchange = "this.form.submit();" })
+                                </th>
+                               
+                                <th>
+                                    填表人
+                                    @Html.RadioButtonFor(model => model.sortOrder, "lmuser_desc", new { id = "Choice_3", onchange = "this.form.submit();" })
+                                </th>
+                                
+                                <th>
+                                    <p class="text-center">
+                                        填表時間
+                                        @Html.RadioButtonFor(model => model.sortOrder, "lmtime_desc", new { id = "Choice_4", onchange = "this.form.submit();" })
+                                    </p>
+                                </th>
+                                <th>
+                                    簽核人
+
+                                </th>
+                                <th>
+                                    簽核日期
+                                </th>
+                                <th>
+                                    承辦人
+                                </th>
+                                <th>
+                                    結案日期
+                                </th>
+                               
+                                <th>
+                                    <p class="text-center"> 姓名</P>
+                                </th>
+                                <th>
+                                    總金額
+                                </th>
+                                <th style="word-spacing:105px;white-space:nowrap;">操 作</th>
+                                
+                               <th style="word-spacing:25px;white-space:nowrap;">狀 態 </th>
+
+                                
+                            </tr>
+                      
+                            @foreach (var item in Model.DataList)
+                            {
+                                if (item.exp_type != "Bookmeal")
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.formID
+                                        </td>
+                                        <td>
+                                            @item.formName
+                                        </td>
+                                        <td>
+                                            @item.projectCode
+                                        </td>
+                                       
+                                        <td>
+                                            
+                                                @if ((item.lmuser.IndexOf("@", 2)) > 0)
+                                                {
+                                                    @item.lmuser.Substring(0, (item.lmuser.IndexOf("@", 2)))
+                                                }
+                                                else
+                                                {
+                                                    @item.lmuser
+                                                }
+                                               
+                                        </td>
+                                        <td>
+
+                                            @(((new DateTime(1970, 1, 1)).AddSeconds(Convert.ToInt32(item.lmtime))).ToLocalTime())
+                                        </td>
+                                        @if (item.signuser == "nosign@")
+                                        {
+                                            <td>未簽核</td>
+                                            <td>未簽核</td>
+                                        }
+                                        else
+                                        {
+                                            <td> @item.signuser.Substring(0, (item.closeuser.IndexOf("@", 2)))</td>
+                                            <td> @item.signtime.ToString("yyyy/MM/dd")</td>
+                                        }
+                                        @if (item.signuser == "nosign@")
+                                        {
+                                            <td>未簽核</td>
+                                            <td>未簽核</td>
+                                        }
+                                        else
+                                        {
+                                            <td> @item.closeuser.Substring(0, (item.closeuser.IndexOf("@", 2)))</td>
+                                            <td> @item.closetime.ToString("yyyy/MM/dd")</td>
+                                        }
+                                         
+                                        <td>
+                                            <p class="text-center"> @item.userID</p>
+                                        </td>
+                                        
+                                        <td>
+                                            <p class="text-center"> @item.amount</P>
+                                        </td>
+                                        <td>
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                            @Html.ActionLink("檢視", "DetailView", new { ID = item.ID }, new { @class = "icon-align-left" })
+                                            @if (item.SignStatus)
+                                            {
+
+                                                <span class="glyphicon glyphicon-pencil" aria-hidden="true">修改</span>
+                                               
+                                                <span class="glyphicon glyphicon-trash" aria-hidden="true">刪除</span>
+                                              
+
+                                                    
+                                            }
+                                            else
+                                            {
+                                                if (Context.User.IsInRole("Manager"))
+                                                {
+
+                                                    
+                                                     <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>@Html.ActionLink("簽核", "Edit", new { ID = item.ID })
+                                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>@Html.ActionLink("刪除", "Delete", new { ID = item.ID }, new { @class = "Link", @onclick = "return Confirm_Form()" })
+
+
+                                                }
+                                                else
+                                                {
+
+                                                    if (User.Identity.GetUserName().Substring(0, (User.Identity.GetUserName().IndexOf("@", 2)))== item.lmuser)
+                                                    {
+                                                       
+                                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>@Html.ActionLink("修改", "Edit", new { ID = item.ID })
+                                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>@Html.ActionLink("刪除", "Delete", new { ID = item.ID }, new { @class = "Link", @onclick = "return Confirm_Form()" })
+                                                      
+                                                      
+                                                    }
+                                                    else
+                                                    {
+                                                        
+                                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true">修改</span>
+                                                        <span class="glyphicon glyphicon-trash" aria-hidden="true">刪除</span>
+                                                        
+                                                        
+                                                    }
+
+                                                }
+                                                
+                                            }
+                                        </td>
+                                        <td>
+                                            @if(item.SignStatus)
+                                                {
+                                                <span class="glyphicon glyphicon-ok" aria-hidden="true">已簽核</span>
+                                                }
+                                                else
+                                                {
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true">未簽核</span>
+                                                }
+                                        </td>
+                                            
+                                 </tr>
+                                    Model.NTamount += item.amount;
+                                }
+                            }
+                    </table>
+                    </form>
+            }
+        </div>
+        <hr>
+        <div id="footer" style="clear:both;text-align:center;">
+            <font size="4">
+                <td>
+                    @*若目前所在頁數大於1，則顯示上一頁與最前頁的按鈕*@
+                    @if (Model.Paging.NowPage > 1)
+                {
+                        @Html.ActionLink("<<", "Demand"
+                    , new { Page = 1, Search = Model.Search, Model.sortOrder })
+                        @Html.ActionLink("<", "Demand"
+                    , new { Page = Model.Paging.NowPage - 1, Search = Model.Search, Model.sortOrder })
+                    }
+                </td>
+                <td>
+                    @*顯示當前頁數前後各五頁的頁數*@
+                    @for (var page = (Model.Paging.NowPage - 6); page < (Model.Paging.NowPage + 6); page++)
+                {
+                    if ((page > 0) && (page <= Model.Paging.MaxPage))
+                    {
+                        if (page == Model.Paging.NowPage)
+                        {
+                                <b>@page</b>
+                            }
+                            else
+                            {
+                                @Html.ActionLink(page.ToString(), "Demand"
+                            , new { Page = page, Search = Model.Search ,Model.sortOrder })
+                            }
+                        }
+                    }
+                </td>
+                <td>
+                    @*若目前所在頁數小於總頁數，則顯示下一頁與最後一頁的按鈕*@
+                    @if (Model.Paging.NowPage < Model.Paging.MaxPage)
+                    {
+
+                        @Html.ActionLink(">", "Demand"
+                    , new { Page = Model.Paging.NowPage + 1, Search = Model.Search, Model.sortOrder })
+                        @Html.ActionLink(">>", "Demand"
+                    , new { Page = Model.Paging.MaxPage, Search = Model.Search, Model.sortOrder })
+                    }
+                </td>
+            </font>
+        </div>
+        <div style=clear:both;text-align:right;>
+            <font size="7">
+                頁面總金額:@Model.NTamount
+
+            </font>
+        </div>
+
+}
+else
+{
+            <h2>尚未登入</h2>
+}

@@ -1,0 +1,271 @@
+﻿@model Cost_Management.Models.expense_form
+@using Cost_Management.Controllers
+
+    <h2>申報單明細</h2>
+<div id="menu" style="background-width:60%;float:left;">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.formID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.formID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.formName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.formName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.formNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.formNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RequireNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequireNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.circleID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.circleID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.projectCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.projectCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.exp_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.exp_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.userID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.userName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.exp_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.exp_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.exp_attr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.exp_attr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.currency)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.currency)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QTY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QTY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.invoice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.invoice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lmuser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lmuser)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.lmtime)
+        </dt>
+
+        <dd>
+            @(((new DateTime(1970, 1, 1)).AddSeconds(Convert.ToInt32(Model.lmtime))).ToLocalTime())
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.signuser)
+        </dt>
+
+        <dd>
+            @if (@Model.SignStatus)
+            {
+                @Html.DisplayFor(model => model.signuser)
+            }
+            
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.signtime)
+        </dt>
+
+        <dd>
+            @if (@Model.SignStatus)
+            {
+                @Html.DisplayFor(model => model.signtime)
+            }
+
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.closeuser)
+        </dt>
+
+        <dd>
+            @if (@Model.SignStatus)
+            {
+                @Html.DisplayFor(model => model.closeuser)
+            }
+            
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.closetime)
+        </dt>
+
+        <dd>
+            @if (@Model.SignStatus)
+            {
+                @Html.DisplayFor(model => model.closetime)
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.note)
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocumentsNumber)
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.DocumentsNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.picture)
+        </dt>
+
+    </dl>
+
+</div>
+<div id="content" style="width:55%;height:10px;float:right;">
+</div>
+<div id="content" style="width:55%;height:100px;float:right;">
+
+   
+        @if (MasterController.picturexist[0] != null)
+        {
+            <img src="@Model.picture" />
+        }
+        @if (MasterController.picturexist[1] != null)
+        {
+            <img src="@Model.picture1" />
+        }
+        @if (MasterController.picturexist[2] != null)
+        {
+            <img src="@Model.picture2" />
+        }
+        @if(MasterController.picturexist[0] == null&& MasterController.picturexist[1] == null&& MasterController.picturexist[2] == null)
+        {
+             <img src="@Html.Encode(Url.Content("~/Upload/noimg.png"))" />
+        }
+    
+</div>
+
