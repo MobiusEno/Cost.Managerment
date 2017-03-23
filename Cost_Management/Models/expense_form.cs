@@ -19,7 +19,7 @@ namespace Cost_Management.Models
         public string formName { get; set; }
         public string formNumber { get; set; }
         public string RequireNumber { get; set; }
-        public double circleID { get; set; }
+        public string circleID { get; set; }
         public string description { get; set; }
         public string nation { get; set; }
         public string exp_date { get; set; }

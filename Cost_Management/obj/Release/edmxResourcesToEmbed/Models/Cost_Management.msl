@@ -67,7 +67,6 @@
     <EntitySetMapping Name="expense_form">
       <EntityTypeMapping TypeName="enotestModel.expense_form">
         <MappingFragment StoreEntitySet="expense_form">
-          <ScalarProperty Name="RequireNumber" ColumnName="RequireNumber" />
           <ScalarProperty Name="create_time" ColumnName="create_time" />
           <ScalarProperty Name="channel_id" ColumnName="channel_id" />
           <ScalarProperty Name="form_id" ColumnName="form_id" />
@@ -99,6 +98,7 @@
           <ScalarProperty Name="nation" ColumnName="nation" />
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="circleID" ColumnName="circleID" />
+          <ScalarProperty Name="RequireNumber" ColumnName="RequireNumber" />
           <ScalarProperty Name="formNumber" ColumnName="formNumber" />
           <ScalarProperty Name="formName" ColumnName="formName" />
           <ScalarProperty Name="formID" ColumnName="formID" />

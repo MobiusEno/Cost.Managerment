@@ -70,11 +70,11 @@
     <Property Name="formName" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="formNumber" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="RequireNumber" Type="nvarchar" MaxLength="255" />
-    <Property Name="circleID" Type="float" Nullable="false" />
+    <Property Name="circleID" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="description" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="nation" Type="nvarchar" MaxLength="255" />
     <Property Name="exp_date" Type="nvarchar" MaxLength="255" Nullable="false" />
-    <Property Name="location" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="location" Type="nvarchar" MaxLength="255" />
     <Property Name="userID" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="userName" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="exp_type" Type="nvarchar" MaxLength="255" Nullable="false" />

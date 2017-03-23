@@ -25,7 +25,7 @@ namespace Cost_Management.Controllers
         }
 
         [HttpPost]
-        public ActionResult Master( string RequireNumber, float circleID, string description, string nation, string exp_date
+        public ActionResult Master( string RequireNumber, string circleID, string description, string nation, string exp_date
                                               , string location, string userID, string userName, string exp_type, string exp_attr, string currency, float QTY
                                               , string price, float amount, string tax, string invoice, string projectCode, string note, string DocumentsNumber,
                                     IEnumerable<HttpPostedFileBase> ItemImage0, IEnumerable<HttpPostedFileBase> ItemImage1, IEnumerable<HttpPostedFileBase> ItemImage2)

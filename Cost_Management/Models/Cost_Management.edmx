@@ -75,11 +75,11 @@
           <Property Name="formName" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="formNumber" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="RequireNumber" Type="nvarchar" MaxLength="255" />
-          <Property Name="circleID" Type="float" Nullable="false" />
+          <Property Name="circleID" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="nation" Type="nvarchar" MaxLength="255" />
           <Property Name="exp_date" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="location" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="location" Type="nvarchar" MaxLength="255" />
           <Property Name="userID" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="userName" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="exp_type" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -310,13 +310,13 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="formID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="formName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="formNumber" Type="String" Nullable="false" />
+          <Property Name="formNumber" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="RequireNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="circleID" Type="Double" Nullable="false" />
+          <Property Name="circleID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="nation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="exp_date" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="location" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="userID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="userName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="exp_type" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -416,7 +416,6 @@
           <EntitySetMapping Name="expense_form">
             <EntityTypeMapping TypeName="enotestModel.expense_form">
               <MappingFragment StoreEntitySet="expense_form">
-                <ScalarProperty Name="RequireNumber" ColumnName="RequireNumber" />
                 <ScalarProperty Name="create_time" ColumnName="create_time" />
                 <ScalarProperty Name="channel_id" ColumnName="channel_id" />
                 <ScalarProperty Name="form_id" ColumnName="form_id" />
@@ -448,6 +447,7 @@
                 <ScalarProperty Name="nation" ColumnName="nation" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="circleID" ColumnName="circleID" />
+                <ScalarProperty Name="RequireNumber" ColumnName="RequireNumber" />
                 <ScalarProperty Name="formNumber" ColumnName="formNumber" />
                 <ScalarProperty Name="formName" ColumnName="formName" />
                 <ScalarProperty Name="formID" ColumnName="formID" />

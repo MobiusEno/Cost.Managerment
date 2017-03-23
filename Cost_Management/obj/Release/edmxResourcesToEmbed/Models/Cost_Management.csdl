@@ -118,13 +118,13 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="formID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="formName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="formNumber" Type="String" Nullable="false" />
+    <Property Name="formNumber" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="RequireNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="circleID" Type="Double" Nullable="false" />
+    <Property Name="circleID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="nation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="exp_date" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="location" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="userID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="userName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="exp_type" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />

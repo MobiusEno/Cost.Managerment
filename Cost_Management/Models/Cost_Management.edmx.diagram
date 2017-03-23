@@ -13,7 +13,7 @@
         <AssociationConnector Association="enotestModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="enotestModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="enotestModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="enotestModel.expense_form" Width="1.5" PointX="2.875" PointY="6.125" />
+        <EntityTypeShape EntityType="enotestModel.expense_form" Width="1.5" PointX="2.125" PointY="6.25" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

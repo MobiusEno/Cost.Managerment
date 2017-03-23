@@ -60,7 +60,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.circleID, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.circleID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.circleID, new { htmlAttributes = new { @class = "form-control" , Value= "VA7-M10" } })
                         @Html.ValidationMessageFor(model => model.circleID, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -84,7 +84,16 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.nation, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.nation, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.DropDownListFor(model => model.nation, new SelectList(new List<Object>{
+                       new { value = "台灣" , text = "台灣" },
+                       new { value = "大陸" , text = "大陸" },
+                       new { value = "美國" , text = "美國" },
+                       new { value = "歐洲" , text = "歐洲" },
+                       new { value = "東南亞" , text = "東南亞" }
+                    },
+                  "value",
+                  "text",
+                   10))
                         @Html.ValidationMessageFor(model => model.nation, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -124,7 +133,15 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.exp_type, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.exp_type, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.DropDownListFor(model => model.exp_type, new SelectList(new List<Object>{
+                       new { value = "差旅" , text = "差旅" },
+                       new { value = "設備" , text = "設備" },
+                       new { value = "辦公用品" , text = "辦公用品" },
+                       new { value = "一般費用" , text = "一般費用" }
+                    },
+                  "value",
+                  "text",
+                   10))
                         @Html.ValidationMessageFor(model => model.exp_type, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -132,7 +149,17 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.exp_attr, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.exp_attr, new { htmlAttributes = new { @class = "form-control", placeholder = "餐費/油費/住宿/其它" } })
+                        @Html.DropDownListFor(model => model.exp_attr, new SelectList(new List<Object>{
+                       new { value = "油費" , text = "油費" },
+                       new { value = "車費" , text = "車費" },
+                       new { value = "車費" , text = "餐費" },
+                       new { value = "住宿" , text = "住宿" },
+                       new { value = "文具" , text = "文具" },
+                       new { value = "耗材" , text = "耗材" },
+                    },
+                  "value",
+                  "text",
+                   10))
                         @Html.ValidationMessageFor(model => model.exp_attr, "", new { @class = "text-danger" })
 
                     </div>
@@ -141,7 +168,16 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.currency, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.currency, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.DropDownListFor(model => model.currency, new SelectList(new List<Object>{
+                       new { value = "NT" , text = "NT" },
+                       new { value = "US" , text = "US" },
+                       new { value = "RMB" , text = "RMB" },
+                      
+                    },
+                  "value",
+                  "text",
+                   10))
+
                         @Html.ValidationMessageFor(model => model.currency, "", new { @class = "text-danger" })
                     </div>
                 </div>

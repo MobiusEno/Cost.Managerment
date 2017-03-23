@@ -33,7 +33,7 @@ namespace Cost_Management.Models
 
             [DisplayName("*群組編號:")]
             [Required(ErrorMessage = "請輸入群序號")]
-            public double circleID { get; set; }
+            public string circleID { get; set; }
 
             [DisplayName("*費用說明:")]
             [Required(ErrorMessage = "請輸入費用說明")]
@@ -48,8 +48,8 @@ namespace Cost_Management.Models
             [Required(ErrorMessage = "請輸入消費日期")]
             public string exp_date { get; set; }
 
-            [DisplayName("*消費城市:")]
-            [Required(ErrorMessage = "請輸入消費城市")]
+            [DisplayName("消費城市:")]
+            
             public string location { get; set; }
 
             [DisplayName("*姓名:")]
