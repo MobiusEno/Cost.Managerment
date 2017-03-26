@@ -56,8 +56,8 @@ namespace Cost_Management.Models
             [Required(ErrorMessage = "請輸入姓名")]
             public string userID { get; set; }
 
-            [DisplayName("*工號:")]
-            [Required(ErrorMessage = "請輸入工號")]
+            [DisplayName("工號:")]
+            
             public string userName { get; set; }
 
             [DisplayName("*費用類別:")]

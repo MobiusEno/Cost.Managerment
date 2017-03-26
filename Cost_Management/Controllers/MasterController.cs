@@ -7,7 +7,7 @@ using Cost_Management.Services;
 using Cost_Management.ViewModel;
 using Cost_Management.Models;
 using System.IO;
-
+using Microsoft.AspNet.Identity;
 namespace Cost_Management.Controllers
 {
     public class MasterController : Controller
@@ -93,7 +93,7 @@ namespace Cost_Management.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+        //搜尋表
         public ActionResult Demand(string sortOrder,string Search, string DateSearch,string filterStatus,int Page= 0)
         {
             
@@ -124,7 +124,41 @@ namespace Cost_Management.Controllers
             //將頁面資料傳入View中
             return View(Data);
         }
-
+        //統計表
+        public ActionResult Statistics_table(string sortOrder,string yearSearch,string MonthSearch, string Search, string DateSearch, string projectSearch,string filterStatus, int Page = 0)
+        {
+            
+            string year_month = yearSearch + MonthSearch;
+            MasterView Data = new MasterView();
+            //將傳入值Search(搜尋)放入頁面模型中
+            if(!string.IsNullOrEmpty(DateSearch))
+            {
+                Data.DateSearch = DateSearch;
+            }
+            
+            else 
+            {
+                Data.DateSearch = year_month;
+            }
+          
+            Data.projectSearch = projectSearch;
+            Data.Search = Search;
+            Data.sortOrder = sortOrder;
+            //新增頁面模型中的分頁
+            if (Page == 0)
+            {
+                Data.Paging = new ForPaging();
+            }
+            else
+            {
+                Data.Paging = new ForPaging(Page);
+            }
+            //從Service中取得頁面所需陣列資料
+            Data.DataList = data.GetData1List(Data.Paging, Data.Search, Data.DateSearch, Data.projectSearch,sortOrder);
+            
+            //將頁面資料傳入View中
+            return View(Data);
+        }
         public ActionResult Edit(int ID)
         {
             //取得頁面所需資料，藉由Service取得
@@ -140,30 +174,41 @@ namespace Cost_Management.Controllers
         {
             //將編號設定至修改資料中
             UpdateData.ID = ID;
-            if (User.Identity.Name== user)
-            {
-                UpdateData.signuser = user;
-                UpdateData.closeuser = user;
-                UpdateData.signtime= DateTime.Now;
-                UpdateData.closetime= DateTime.Now;
-                UpdateData.SignStatus= true;
-            }
-            else
-            {
                 UpdateData.signuser = "nosign@";
                 UpdateData.closeuser = "nosign@";
                 UpdateData.signtime = DateTime.Now;
                 UpdateData.closetime = DateTime.Now;
                 UpdateData.SignStatus = false;
-            }
-            
-            
             //使用Service來修改資料
             data.Edit(UpdateData);
             //重新導向頁面至開始頁面
             return RedirectToAction("Demand", "Master");
         }
-
+        public ActionResult SignEdit(int ID)
+        {
+            //取得頁面所需資料，藉由Service取得
+            expense_form Data = data.GetDataById(ID);
+            //將資料傳入View中
+            return View(Data);
+        }
+        [HttpPost] //設定此Action只接受頁面POST資料傳入
+        //使用Bind的Inculde來定義只接受的欄位，用來避免傳入其他不相干值
+        public ActionResult SignEdit(int ID, expense_form UpdateData)
+        {
+            //將編號設定至修改資料中
+            UpdateData.ID = ID;
+            
+                UpdateData.signuser = User.Identity.GetUserName();
+                UpdateData.closeuser = User.Identity.GetUserName();
+            UpdateData.signtime = DateTime.Now;
+                UpdateData.closetime = DateTime.Now;
+                UpdateData.SignStatus = true;
+           
+            //使用Service來修改資料
+            data.Edit(UpdateData);
+            //重新導向頁面至開始頁面
+            return RedirectToAction("Demand", "Master");
+        }
         //刪除表單
         public ActionResult Delete(int ID)
         {

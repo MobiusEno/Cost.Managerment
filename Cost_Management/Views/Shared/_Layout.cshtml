@@ -7,6 +7,7 @@
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/themes/base/css")
 
 </head>
 <body>
@@ -24,8 +25,10 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("填寫費用申報單", "Master", "Master")</li>
                     <li>@Html.ActionLink("查詢費用申報單", "Demand", "Master")</li>
-
-
+                    @if (Context.User.IsInRole("Manager"))
+                    {
+                    <li>@Html.ActionLink("費用申報單統計表", "Statistics_table", "Master")</li>
+                    }
                 </ul>
 
                 @Html.Partial("_LoginPartial")
@@ -40,6 +43,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryui")
     @RenderSection("scripts", required: false)
 </body>
 </html>

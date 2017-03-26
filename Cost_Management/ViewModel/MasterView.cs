@@ -16,14 +16,14 @@ namespace Cost_Management.ViewModel
         public string Search { get; set; }
         [DataType(DataType.Date)]
         public string DateSearch { get; set; }
+        public string yeatSearch { get; set; }
+        public string MonthSearch { get; set; }
+        public string projectSearch { get; set; }
         public ForPaging Paging { get; set; }
         public List<expense_form> DataList { get; set; }
         public List<AspNetUsers> Data1List { get; set; }
         public double NTamount = 0;
-
+        public double taxamount = 0;
         public string sortOrder { get; set; }
-       
-       
-
     }
 }

@@ -23,4 +23,5 @@ namespace IdentitySample.Models
 
         public IEnumerable<SelectListItem> RolesList { get; set; }
     }
+
 }

@@ -99,6 +99,8 @@
                             {
                                 if (item.exp_type != "Bookmeal")
                                 {
+                                    if (item.lmuser== (User.Identity.GetUserName()).Substring(0, (User.Identity.GetUserName().IndexOf("@", 2))) || Context.User.IsInRole("Manager"))
+                                    {
                                     <tr>
                                         <td>
                                             @item.formID
@@ -161,60 +163,59 @@
                                             {
 
                                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true">修改</span>
-                                               
-                                                <span class="glyphicon glyphicon-trash" aria-hidden="true">刪除</span>
-                                              
 
-                                                    
+                                                <span class="glyphicon glyphicon-trash" aria-hidden="true">刪除</span>
+
+
+
                                             }
                                             else
                                             {
                                                 if (Context.User.IsInRole("Manager"))
                                                 {
-
                                                     
-                                                     <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>@Html.ActionLink("簽核", "Edit", new { ID = item.ID })
+                                                     <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>@Html.ActionLink("簽核", "SignEdit", new { ID = item.ID })
                                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>@Html.ActionLink("刪除", "Delete", new { ID = item.ID }, new { @class = "Link", @onclick = "return Confirm_Form()" })
-
-
+                                                    
                                                 }
                                                 else
                                                 {
 
-                                                    if (User.Identity.GetUserName().Substring(0, (User.Identity.GetUserName().IndexOf("@", 2)))== item.lmuser)
+                                                    if (User.Identity.GetUserName().Substring(0, (User.Identity.GetUserName().IndexOf("@", 2))) == item.lmuser)
                                                     {
-                                                       
+
                                                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>@Html.ActionLink("修改", "Edit", new { ID = item.ID })
                                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>@Html.ActionLink("刪除", "Delete", new { ID = item.ID }, new { @class = "Link", @onclick = "return Confirm_Form()" })
-                                                      
-                                                      
+
+
                                                     }
                                                     else
                                                     {
-                                                        
+
                                                         <span class="glyphicon glyphicon-pencil" aria-hidden="true">修改</span>
                                                         <span class="glyphicon glyphicon-trash" aria-hidden="true">刪除</span>
-                                                        
-                                                        
+
+
                                                     }
 
                                                 }
-                                                
+
                                             }
                                         </td>
                                         <td>
-                                            @if(item.SignStatus)
-                                                {
+                                            @if (item.SignStatus)
+                                            {
                                                 <span class="glyphicon glyphicon-ok" aria-hidden="true">已簽核</span>
-                                                }
-                                                else
-                                                {
+                                            }
+                                            else
+                                            {
                                                 <span class="glyphicon glyphicon-remove" aria-hidden="true">未簽核</span>
-                                                }
+                                            }
                                         </td>
                                             
                                  </tr>
-                                    Model.NTamount += item.amount;
+                                        Model.NTamount += item.amount;
+                                    }
                                 }
                             }
                     </table>
